@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción JavaScript</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            background: linear-gradient(to right, #172554, #4f6dbd);
+            padding-bottom: 40px;
+        }
+        h1 {
+            padding-top: 60px;
+            font-size: 60px;
+            font-variant: small-caps;
+        }
+        h2 {
+            font-size: 36px;
+            font-variant: small-caps;
+            font-weight: normal;
+        }
+        h3 {
+            font-size: 40px;
+            font-weight: normal;
+        }
+        .botones {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        button {
+            display: block;
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #resultado {
+            max-width: 700px;
+            margin: 20px auto 0 auto;
+            padding: 15px;
+            border: 1px solid white;
+            min-height: 80px;
+            line-height: 1.5;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Desarrollo Web Completo</h1>
+    <h2>Introducción a JavaScript</h2>
+    <h3>#JavaScript</h3>
+
+    <h2>Ejercicios con JavaScript</h2>
+    <p>Elige un ejercicio. El programa te pedirá los datos en ventanas y los resultados aparecerán abajo.</p>
+
+    <div class="botones">
+        <button onclick="limpiar(); ejercicio1()">1. Evaluación del desempeño académico</button>
+        <button onclick="limpiar(); ejercicio2()">2. Sistema de descuentos de una tienda</button>
+        <button onclick="limpiar(); ejercicio3()">3. Validación de acceso a un sistema</button>
+        <button onclick="limpiar(); ejercicio4()">4. Tabla de multiplicar personalizada</button>
+        <button onclick="limpiar(); ejercicio5()">5. Registro de ventas semanales</button>
+        <button onclick="limpiar(); ejercicio6()">6. Calculadora mediante funciones</button>
+        <button onclick="limpiar(); ejercicio7()">7. Administración de alumnos</button>
+        <button onclick="limpiar(); ejercicio8()">8. Sistema de inventario</button>
+    </div>
+
+    <h2>Resultados</h2>
+    <div id="resultado"></div>
+
+    <script>
+// Funciones de ayuda para mostrar los resultados en la página
+function mostrar(texto) {
+    document.getElementById("resultado").innerHTML += texto + "<br>";
+}
+
+function limpiar() {
+    document.getElementById("resultado").innerHTML = "";
+}
+
+
+// Ejercicio 1 (versión para navegador)
+function ejercicio1() {
+    // Evaluación del desempeño académico
+    let nombre = prompt("Nombre del alumno: ");
+    let cal1 = Number(prompt("Calificación 1: "));
+    let cal2 = Number(prompt("Calificación 2: "));
+    let cal3 = Number(prompt("Calificación 3: "));
+
+    if (isNaN(cal1) || isNaN(cal2) || isNaN(cal3)) {
+        mostrar("Error: debes escribir solo números.");
+    } else if (cal1 < 0 || cal1 > 10 || cal2 < 0 || cal2 > 10 || cal3 < 0 || cal3 > 10) {
+        mostrar("Error: las calificaciones deben estar entre 0 y 10.");
+    } else {
+        let promedio = (cal1 + cal2 + cal3) / 3;
+        let desempeno;
+
+        if (promedio >= 9) {
+            desempeno = "Excelente";
+        } else if (promedio >= 8) {
+            desempeno = "Bueno";
+        } else if (promedio >= 7) {
+            desempeno = "Satisfactorio";
+        } else {
+            desempeno = "No acreditado";
+        }
+
+        mostrar("Alumno: " + nombre);
+        mostrar("Calificación 1: " + cal1);
+        mostrar("Calificación 2: " + cal2);
+        mostrar("Calificación 3: " + cal3);
+        mostrar("Promedio: " + promedio.toFixed(2));
+        mostrar("Desempeño: " + desempeno);
+    }
+}
+
+
+// Ejercicio 2 (versión para navegador)
+function ejercicio2() {
+    // Sistema de descuentos de una tienda
+    let nombre = prompt("Nombre del cliente: ");
+    let monto = Number(prompt("Monto de la compra: $"));
+    let vip = prompt("¿Es miembro VIP? (si/no): ").toLowerCase();
+
+    if (isNaN(monto) || monto < 0) {
+        mostrar("Error: el monto no es válido.");
+    } else {
+        let porcentaje;
+
+        if (monto < 500) {
+            porcentaje = 0;
+        } else if (monto < 1000) {
+            porcentaje = 5;
+        } else if (monto < 3000) {
+            porcentaje = 10;
+        } else {
+            porcentaje = 15;
+        }
+
+        let descuento = monto * porcentaje / 100;
+        let totalParcial = monto - descuento;
+
+        // Descuento adicional VIP sobre el importe ya con el primer descuento
+        let descuentoVip = 0;
+        if (vip === "si") {
+            descuentoVip = totalParcial * 0.05;
+        }
+
+        let totalFinal = totalParcial - descuentoVip;
+        let descuentoTotal = descuento + descuentoVip;
+
+        mostrar("Cliente: " + nombre);
+        mostrar("Monto de la compra: $" + monto.toFixed(2));
+        mostrar("Descuento por monto (" + porcentaje + "%): $" + descuento.toFixed(2));
+        mostrar("Descuento VIP (5%): $" + descuentoVip.toFixed(2));
+        mostrar("Descuento total aplicado: $" + descuentoTotal.toFixed(2));
+        mostrar("Total final: $" + totalFinal.toFixed(2));
+    }
+}
+
+
+// Ejercicio 3 (versión para navegador)
+function ejercicio3() {
+    // Validación de acceso a un sistema
+    // Usuarios registrados en el sistema
+    let usuarios = [
+        { usuario: "admin", contrasena: "1234", tipo: "administrador", activo: true },
+        { usuario: "maria", contrasena: "abcd", tipo: "empleado", activo: true },
+        { usuario: "pedro", contrasena: "5678", tipo: "empleado", activo: false }
+    ];
+
+    let nombreUsuario = prompt("Usuario: ");
+    let contrasena = prompt("Contraseña: ");
+    let tipo = prompt("Tipo de usuario (administrador/empleado): ").toLowerCase();
+
+    // Buscar el usuario en la lista
+    let encontrado = null;
+    for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].usuario === nombreUsuario) {
+            encontrado = usuarios[i];
+        }
+    }
+
+    if (encontrado === null) {
+        mostrar("Acceso rechazado: el usuario no existe.");
+    } else if (encontrado.contrasena !== contrasena) {
+        mostrar("Acceso rechazado: la contraseña es incorrecta.");
+    } else if (encontrado.tipo !== tipo) {
+        mostrar("Acceso rechazado: el tipo de usuario no coincide.");
+    } else if (encontrado.activo === false) {
+        mostrar("Acceso rechazado: el usuario está inactivo.");
+    } else if (encontrado.tipo === "administrador") {
+        mostrar("Acceso al panel de administración");
+    } else {
+        mostrar("Acceso al sistema de empleados");
+    }
+}
+
+
+// Ejercicio 4 (versión para navegador)
+function ejercicio4() {
+    // Tabla de multiplicar personalizada
+    let numero = Number(prompt("Escribe un número entero entre 1 y 20: "));
+
+    if (isNaN(numero) || !Number.isInteger(numero)) {
+        mostrar("Error: debes escribir un número entero.");
+    } else if (numero < 1 || numero > 20) {
+        mostrar("Error: el número debe estar entre 1 y 20.");
+    } else {
+        mostrar("Tabla de multiplicar del " + numero);
+        for (let i = 1; i <= 12; i++) {
+            mostrar(numero + " x " + i + " = " + (numero * i));
+        }
+    }
+}
+
+
+// Ejercicio 5 (versión para navegador)
+function ejercicio5() {
+    // Registro de ventas semanales
+    let dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+    let ventas = [];
+    let total = 0;
+
+    // Pedir las ventas de cada día
+    for (let i = 0; i < 7; i++) {
+        let venta = Number(prompt("Ventas del día " + dias[i] + ": $"));
+
+        while (isNaN(venta) || venta < 0) {
+            mostrar("Valor no válido, intenta de nuevo.");
+            venta = Number(prompt("Ventas del día " + dias[i] + ": $"));
+        }
+
+        ventas.push(venta);
+        total = total + venta;
+    }
+
+    let promedio = total / 7;
+
+    // Buscar el día con mayor y menor venta
+    let mayor = ventas[0];
+    let menor = ventas[0];
+    let diaMayor = dias[0];
+    let diaMenor = dias[0];
+
+    for (let i = 1; i < 7; i++) {
+        if (ventas[i] > mayor) {
+            mayor = ventas[i];
+            diaMayor = dias[i];
+        }
+        if (ventas[i] < menor) {
+            menor = ventas[i];
+            diaMenor = dias[i];
+        }
+    }
+
+    mostrar("----- Resumen de la semana -----");
+    for (let i = 0; i < 7; i++) {
+        mostrar(dias[i] + ": $" + ventas[i].toFixed(2));
+    }
+    mostrar("Total semanal: $" + total.toFixed(2));
+    mostrar("Promedio diario: $" + promedio.toFixed(2));
+    mostrar("Día con mayor venta: " + diaMayor + " ($" + mayor.toFixed(2) + ")");
+    mostrar("Día con menor venta: " + diaMenor + " ($" + menor.toFixed(2) + ")");
+}
+
+
+// Ejercicio 6 (versión para navegador)
+function ejercicio6() {
+    // Calculadora mediante funciones
+    function sumar(a, b) {
+        return a + b;
+    }
+
+    function restar(a, b) {
+        return a - b;
+    }
+
+    function multiplicar(a, b) {
+        return a * b;
+    }
+
+    function dividir(a, b) {
+        return a / b;
+    }
+
+    let texto1 = prompt("Primer número: ");
+    let texto2 = prompt("Segundo número: ");
+    let operacion = prompt("Operación (suma, resta, multiplicacion, division): ").toLowerCase();
+
+    let num1 = Number(texto1);
+    let num2 = Number(texto2);
+
+    // Validar que sean números
+    if (texto1.trim() === "" || texto2.trim() === "" || isNaN(num1) || isNaN(num2)) {
+        mostrar("Error: debes escribir valores numéricos.");
+    } else {
+        switch (operacion) {
+            case "suma":
+                mostrar("Resultado: " + sumar(num1, num2));
+                break;
+            case "resta":
+                mostrar("Resultado: " + restar(num1, num2));
+                break;
+            case "multiplicacion":
+                mostrar("Resultado: " + multiplicar(num1, num2));
+                break;
+            case "division":
+                if (num2 === 0) {
+                    mostrar("Error: no se puede dividir entre cero.");
+                } else {
+                    mostrar("Resultado: " + dividir(num1, num2));
+                }
+                break;
+            default:
+                mostrar("Error: la operación no es válida.");
+        }
+    }
+}
+
+
+// Ejercicio 7 (versión para navegador)
+function ejercicio7() {
+    // Administración de alumnos
+    let alumnos = [];
+
+    // Registrar cinco alumnos
+    for (let i = 1; i <= 5; i++) {
+        mostrar("--- Alumno " + i + " ---");
+        let nombre = prompt("Nombre: ");
+        let matricula = prompt("Matrícula: ");
+        let carrera = prompt("Carrera: ");
+        let promedio = Number(prompt("Promedio general: "));
+
+        while (isNaN(promedio) || promedio < 0 || promedio > 10) {
+            mostrar("El promedio debe ser un número entre 0 y 10.");
+            promedio = Number(prompt("Promedio general: "));
+        }
+
+        let alumno = {
+            nombre: nombre,
+            matricula: matricula,
+            carrera: carrera,
+            promedio: promedio
+        };
+
+        alumnos.push(alumno);
+    }
+
+    // Mostrar todos los alumnos
+    mostrar("----- Lista de alumnos -----");
+    for (let i = 0; i < alumnos.length; i++) {
+        mostrar("Nombre: " + alumnos[i].nombre);
+        mostrar("Matrícula: " + alumnos[i].matricula);
+        mostrar("Carrera: " + alumnos[i].carrera);
+        mostrar("Promedio: " + alumnos[i].promedio);
+        mostrar("");
+    }
+
+    // Alumno con el promedio más alto, suma del grupo y alumnos con 7 o más
+    let mejor = alumnos[0];
+    let suma = 0;
+    let aprobados = 0;
+
+    for (let i = 0; i < alumnos.length; i++) {
+        if (alumnos[i].promedio > mejor.promedio) {
+            mejor = alumnos[i];
+        }
+        suma = suma + alumnos[i].promedio;
+        if (alumnos[i].promedio >= 7) {
+            aprobados++;
+        }
+    }
+
+    let promedioGrupo = suma / alumnos.length;
+
+    mostrar("Alumno con el promedio más alto: " + mejor.nombre + " (" + mejor.promedio + ")");
+    mostrar("Promedio general del grupo: " + promedioGrupo.toFixed(2));
+    mostrar("Alumnos con promedio igual o superior a 7: " + aprobados);
+}
+
+
+// Sistema de inventario (versión para navegador)
+// Sistema de inventario
+let inventario = [];
+
+function registrarProducto() {
+    let codigo = prompt("Código: ");
+
+    // Revisar que el código no esté repetido
+    for (let i = 0; i < inventario.length; i++) {
+        if (inventario[i].codigo === codigo) {
+            mostrar("Ya existe un producto con ese código.");
+            return;
+        }
+    }
+
+    let nombre = prompt("Nombre: ");
+    let precio = Number(prompt("Precio: $"));
+    let cantidad = Number(prompt("Cantidad disponible: "));
+    let categoria = prompt("Categoría: ");
+
+    if (isNaN(precio) || precio < 0 || isNaN(cantidad) || cantidad < 0) {
+        mostrar("Datos no válidos, el producto no se registró.");
+        return;
+    }
+
+    let producto = {
+        codigo: codigo,
+        nombre: nombre,
+        precio: precio,
+        cantidad: cantidad,
+        categoria: categoria
+    };
+
+    inventario.push(producto);
+    mostrar("Producto registrado.");
+}
+
+function mostrarProducto(p) {
+    mostrar("Código: " + p.codigo);
+    mostrar("Nombre: " + p.nombre);
+    mostrar("Precio: $" + p.precio.toFixed(2));
+    mostrar("Cantidad: " + p.cantidad);
+    mostrar("Categoría: " + p.categoria);
+    mostrar("");
+}
+
+function consultarInventario() {
+    if (inventario.length === 0) {
+        mostrar("El inventario está vacío.");
+        return;
+    }
+    mostrar("----- Inventario -----");
+    for (let i = 0; i < inventario.length; i++) {
+        mostrarProducto(inventario[i]);
+    }
+}
+
+function buscarProducto() {
+    let codigo = prompt("Código a buscar: ");
+    let encontrado = false;
+
+    for (let i = 0; i < inventario.length; i++) {
+        if (inventario[i].codigo === codigo) {
+            mostrarProducto(inventario[i]);
+            encontrado = true;
+        }
+    }
+
+    if (encontrado === false) {
+        mostrar("No se encontró un producto con ese código.");
+    }
+}
+
+function calcularValorTotal() {
+    let total = 0;
+    for (let i = 0; i < inventario.length; i++) {
+        total = total + (inventario[i].precio * inventario[i].cantidad);
+    }
+    mostrar("Valor total de las existencias: $" + total.toFixed(2));
+}
+
+function productosPocoStock() {
+    let hay = false;
+    mostrar("----- Productos con menos de 5 unidades -----");
+    for (let i = 0; i < inventario.length; i++) {
+        if (inventario[i].cantidad < 5) {
+            mostrarProducto(inventario[i]);
+            hay = true;
+        }
+    }
+    if (hay === false) {
+        mostrar("Ningún producto tiene menos de 5 unidades.");
+    }
+}
+
+// Menú principal
+function ejercicio8() {
+    let opcion = "";
+
+    while (opcion !== "6") {
+        opcion = prompt("MENÚ\n1. Registrar producto\n2. Consultar inventario\n3. Buscar producto por código\n4. Calcular valor total de existencias\n5. Ver productos con poco stock\n6. Salir\n\nElige una opción:");
+
+        if (opcion === null) {
+            opcion = "6";
+        }
+
+        switch (opcion) {
+            case "1":
+                registrarProducto();
+                break;
+            case "2":
+                consultarInventario();
+                break;
+            case "3":
+                buscarProducto();
+                break;
+            case "4":
+                calcularValorTotal();
+                break;
+            case "5":
+                productosPocoStock();
+                break;
+            case "6":
+                mostrar("Programa terminado.");
+                break;
+            default:
+                mostrar("Opción no válida.");
+        }
+    }
+}
+
+    </script>
+</body>
+</html>
